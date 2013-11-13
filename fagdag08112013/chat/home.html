@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>Chat Example</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+    var conn;
+    var msg = $("#msg");
+    var log = $("#log");
+
+    function appendLog(msg) {
+        var d = log[0]
+        var doScroll = d.scrollTop == d.scrollHeight - d.clientHeight;
+        msg.appendTo(log)
+        if (doScroll) {
+            d.scrollTop = d.scrollHeight - d.clientHeight;
+        }
+    }
+
+    $("#form").submit(function() {
+        if (!conn) {
+            return false;
+        }
+        if (!msg.val()) {
+            return false;
+        }
+        conn.send(msg.val());
+        msg.val("");
+        return false
+    });
+
+    if (window["WebSocket"]) {
+        // START1 OMIT
+        conn = new WebSocket("ws://{{$}}/ws");
+        
+        conn.onmessage = function(event) {
+            appendLog($("<div class='message'/>").text("> " + event.data))
+        };
+        
+        conn.onclose = function(event) {
+            appendLog($("<div><b>Connection closed.</b></div>"))
+        };
+        // END1 OMIT
+    } else {
+        appendLog($("<div><b>Your browser does not support WebSockets.</b></div>"))
+    }
+    });
+</script>
+<style type="text/css">
+html {
+    overflow: hidden;
+    font-family: Verdana;
+}
+
+body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(57, 72, 74);
+}
+
+#log {
+    -webkit-border-radius: 10px;
+    border-radius: 5px;
+    background: white;
+    margin: 0;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    position: absolute;
+    top: 2em;
+    left: 2em;
+    right: 2em;
+    bottom: 5em;
+    overflow: auto;
+}
+
+#form {
+    padding: 0 0.5em 0 0.5em;
+    margin: 0;
+    position: absolute;
+    bottom: 1.5em;
+    left: 22px;
+    width: 100%;
+    overflow: hidden;
+}
+
+input[type="submit"] {
+    background: rgb(57, 72, 74);
+    border: none;
+    font-size: 1.2em;
+    border-radius: 5px;
+    color: white;
+    cursor: hand;
+}
+
+input[type="text"] {
+    border: none;
+    padding: 5px;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.message {
+    font-size: 1.8em;
+}
+
+</style>
+</head>
+<body>
+<div id="log"></div>
+<form id="form" autocomplete="off">
+    <input type="text" placeholder="Skriv..." id="msg" size="64"/>
+</form>
+</body>
+</html>

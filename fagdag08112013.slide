@@ -1,0 +1,68 @@
+Let's Go!
+En introduksjon til Go
+
+* Hva er Go?
+- Programmeringsspråk utviklet av Google som ble annonsert i november 2009
+- Versjon 1.1.2 (release i august 2013)
+- Syntaks inspirert av C
+- "Enkelt"
+- Statisk linking
+- Har egen maskot (Gopher)
+
+.image fagdag08112013/gopher.png 200 200
+
+* Hello world
+.play fagdag08112013/hello.go
+
+* Channels og go routines
+- Channels brukes til å synkronisere go routines
+- Go routines er lettvekts prosesser
+
+"Do not communicate by sharing memory; instead, share memory by communicating."
+
+* Ping pong
+.play fagdag08112013/pingpong.go /STARTMAIN1/,/STOPMAIN1/
+
+#* Interface
+#- Bruker interface til å spesifisere oppførsel
+#- Implisitt implementering av interface
+#.code fagdag08112013/area.go /START1/,/END1/
+#.play fagdag08112013/area.go /START2/,/END2/
+
+* Chat server
+
+* Chat server
+
+- Koble (en eller flere) klienter til en server
+- Sende meldinger til alle klientene
+- Server med to handlers
+- En for å servere klienten html
+- En for å ta i mot og sende meldinger over WebSockets
+- http://gary.beagledreams.com/go/websocket-example
+
+* Chat server
+.code fagdag08112013/chat/main.go /START2/,/END2/
+.code fagdag08112013/chat/hub.go /START2/,/END2/
+
+* Chat server
+.code fagdag08112013/chat/main.go /START2/,/END2/
+.code fagdag08112013/chat/conn.go /START4/,/END4/
+
+* Chat server
+.code fagdag08112013/chat/conn.go /START4/,/END4/
+.code fagdag08112013/chat/conn.go /START2/,/END2/
+
+* Chat server
+
+.code fagdag08112013/chat/conn.go /START4/,/END4/
+.code fagdag08112013/chat/conn.go /START3/,/END3/
+
+#* Chat server
+#.code fagdag08112013/chat/home.html /START1/,/END1/
+
+* Og masse mer...
+- Bygging og kjøring
+- Utviklingsmiljø
+- Dokumentasjon
+- Testing 
+- http://golang.org
