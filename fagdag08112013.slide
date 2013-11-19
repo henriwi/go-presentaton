@@ -1,5 +1,4 @@
-Let's Go!
-En introduksjon til Go
+Introduksjon til Go
 
 * Hva er Go?
 - Programmeringsspråk utviklet av Google som ble annonsert i november 2009
@@ -7,12 +6,93 @@ En introduksjon til Go
 - Syntaks inspirert av C
 - "Enkelt"
 - Statisk linking
+- Garbage collection
 - Har egen maskot (Gopher)
 
 .image fagdag08112013/gopher.png 200 200
 
 * Hello world
 .play fagdag08112013/hello.go
+
+* Bygging og kjøring
+
+* Bygging og kjøring
+
+	// Kjør hello.go
+	go run hello.go
+
+	// Kompiler
+	go build
+	
+	// Kompiler og installer 
+	go install
+
+
+* Workspace
+
+	bin/                                # command executables
+		gorss
+	pkg/
+	  darwin_amd64/
+	  	code.google.com/p/go.example/newmath
+	  	  newmath.a                     # package object
+	src/
+	  code.google.com/p/go.example/newmath/
+	  	.hg/                          # mercurial repository metadata
+	    newmath/
+	    	newmath.go                    # package source
+	  github.com/henriwi/
+	  	gorss/
+	    	.git/                       # git repository metadata
+	      	gorss.go                  # command source
+
+* Eksterne pakker
+
+- Go get vil hente alle eksterne pakker
+	
+	go get code.google.com/p/go.example/hello
+
+	-------
+	
+	import (
+		"fmt"
+		"code.google.com/p/go.example/newmath"
+	)
+
+	func main() {
+		fmt.Println(newmath.Sqrt(2))
+	}
+
+* Formatering av koden
+
+* go fmt
+- Etablert standard for formatering
+- go fmt vil formatere kildekoden
+
+	package main
+
+	import 
+	(
+	"code.google.com/p/go.example/newmath"
+	"fmt"
+	)
+
+	func main() {
+	fmt.Println(newmath.Sqrt(2))
+	}
+
+* go fmt
+
+	package main
+
+	import (
+		"code.google.com/p/go.example/newmath"
+		"fmt"
+	)
+
+	func main() {
+		fmt.Println(newmath.Sqrt(2))
+	}
 
 * Channels og go routines
 - Channels brukes til å synkronisere go routines
@@ -23,11 +103,17 @@ En introduksjon til Go
 * Ping pong
 .play fagdag08112013/pingpong.go /STARTMAIN1/,/STOPMAIN1/
 
-#* Interface
-#- Bruker interface til å spesifisere oppførsel
-#- Implisitt implementering av interface
-#.code fagdag08112013/area.go /START1/,/END1/
-#.play fagdag08112013/area.go /START2/,/END2/
+* Interface
+- Bruker interface til å spesifisere oppførsel
+- Implisitt implementering av interface
+.code fagdag08112013/area.go /START1/,/END1/
+.play fagdag08112013/area.go /START2/,/END2/
+
+* Feilhåndtering
+- En funksjon kan returnere flere verdier
+- Vanlig å returnere verdi og evt. feil
+
+.play fagdag08112013/error.go
 
 * Chat server
 
@@ -60,9 +146,67 @@ En introduksjon til Go
 #* Chat server
 #.code fagdag08112013/chat/home.html /START1/,/END1/
 
-* Og masse mer...
-- Bygging og kjøring
-- Utviklingsmiljø
+* Testing
+- Lag en fil med navn XXX_test.go
+- Testrammeverket kaller alle funksjoner av typen
+
+	func TestXXX(t* testing.T) {
+		...
+	}
+
+- Testen feiler hvis man kaller t.Error eller t.Fail
+- Kjører testene med go test
+
+* Testing
+	
+	var sqrtTests = []struct {
+	        In  float64
+	        Out float64
+	}{
+	        {1, 1},
+	        {2, 1.4142135623730951},
+	        {3, 1.7320508075688771},
+	        {100, 10},
+	        {200, 14.142135623730951},
+	}
+
+	func TestSqrt(t *testing.T) {
+	        for _, tt := range sqrtTests {
+	                if x := Sqrt(tt.In); math.Abs(x-tt.Out) > *err {
+	                        t.Errorf("Sqrt(%v) = %v, want %v", tt.In, x, tt.Out)
+	                }
+	        }
+	}
+
+* Hva kan Go brukes til?
+
+* Hvem bruker Go?
+- Google (dl.google.com)
+- Docker
+- Heroku
+- SoundCloud
+
+#http://blog.golang.org/4years
+#http://talks.golang.org/2013/oscon-dl.slide#1
+#http://talks.golang.org/2013/bestpractices.slide#1
+#http://www.slideshare.net/jpetazzo/docker-and-go-why-did-we-decide-to-write-docker-in-go
+#http://robfig.github.io/revel/
+
+* +
+- "Enkelt"
 - Dokumentasjon
-- Testing 
-- http://golang.org
+- Rikt standardbibliotek
+- Built-in concurrency
+- Gøy å jobbe med!
+
+* -
+- Verbos feilhåndtering
+- Implisitt implementering av interface
+- Testing
+
+#* Og masse mer...
+#- Bygging og kjøring
+#- Utviklingsmiljø
+#- Dokumentasjon
+#- Testing 
+#- http://golang.org
