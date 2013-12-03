@@ -2,7 +2,7 @@ Introduksjon til Go
 
 * Hva er Go?
 - Programmeringsspråk utviklet av Google som ble annonsert i november 2009
-- Versjon 1.1.2 (release i august 2013)
+- Versjon 1.2 (release 1. desember 2013)
 - Syntaks inspirert av C
 - "Enkelt"
 - Statisk linking
@@ -30,27 +30,27 @@ Introduksjon til Go
 
 * Workspace
 
-	bin/                                # command executables
+	bin/                                      # command executables
 		gorss
 	pkg/
-	  darwin_amd64/
+	  darwin_amd64/                           # package object
 	  	code.google.com/p/go.example/newmath
-	  	  newmath.a                     # package object
+		  newmath.a                       
 	src/
-	  code.google.com/p/go.example/newmath/
-	  	.hg/                          # mercurial repository metadata
+	  code.google.com/p/go.example/newmath/   # mercurial repository
+	  	.hg/                            
 	    newmath/
-	    	newmath.go                    # package source
+	    	newmath.go                        # package source
 	  github.com/henriwi/
 	  	gorss/
-	    	.git/                       # git repository metadata
-	      	gorss.go                  # command source
+	    	.git/                             # git repository metadata
+	      	gorss.go                        # command source
 
 * Eksterne pakker
 
-- Go get vil hente alle eksterne pakker
+- Go get brukes til å hente eksterne pakker
 	
-	go get code.google.com/p/go.example/hello
+	go get code.google.com/p/go.example/newmath
 
 	-------
 	
@@ -63,13 +63,12 @@ Introduksjon til Go
 		fmt.Println(newmath.Sqrt(2))
 	}
 
-* Formatering av koden
+- Versjonering?
 
 * go fmt
-- Etablert standard for formatering
-- go fmt vil formatere kildekoden
+- go fmt vil formatere kildekoden etter gitt standard
 
-	package main
+* go fmt
 
 	import 
 	(
@@ -81,9 +80,7 @@ Introduksjon til Go
 	fmt.Println(newmath.Sqrt(2))
 	}
 
-* go fmt
-
-	package main
+go fmt
 
 	import (
 		"code.google.com/p/go.example/newmath"
@@ -114,37 +111,6 @@ Introduksjon til Go
 - Vanlig å returnere verdi og evt. feil
 
 .play fagdag08112013/error.go
-
-* Chat server
-
-* Chat server
-
-- Koble (en eller flere) klienter til en server
-- Sende meldinger til alle klientene
-- Server med to handlers
-- En for å servere klienten html
-- En for å ta i mot og sende meldinger over WebSockets
-- http://gary.beagledreams.com/go/websocket-example
-
-* Chat server
-.code fagdag08112013/chat/main.go /START2/,/END2/
-.code fagdag08112013/chat/hub.go /START2/,/END2/
-
-* Chat server
-.code fagdag08112013/chat/main.go /START2/,/END2/
-.code fagdag08112013/chat/conn.go /START4/,/END4/
-
-* Chat server
-.code fagdag08112013/chat/conn.go /START4/,/END4/
-.code fagdag08112013/chat/conn.go /START2/,/END2/
-
-* Chat server
-
-.code fagdag08112013/chat/conn.go /START4/,/END4/
-.code fagdag08112013/chat/conn.go /START3/,/END3/
-
-#* Chat server
-#.code fagdag08112013/chat/home.html /START1/,/END1/
 
 * Testing
 - Lag en fil med navn XXX_test.go
@@ -178,6 +144,38 @@ Introduksjon til Go
 	        }
 	}
 
+
+* Chat server
+
+* Chat server
+
+- Koble (en eller flere) klienter til en server
+- Sende meldinger til alle klientene
+- Server med to handlers
+- En for å servere klienten html
+- En for å ta i mot og sende meldinger over WebSockets
+- http://gary.beagledreams.com/go/websocket-example
+
+* Chat server
+.code fagdag08112013/chat/main.go /START2/,/END2/
+.code fagdag08112013/chat/hub.go /START2/,/END2/
+
+* Chat server
+.code fagdag08112013/chat/main.go /START2/,/END2/
+.code fagdag08112013/chat/conn.go /START4/,/END4/
+
+* Chat server
+.code fagdag08112013/chat/conn.go /START4/,/END4/
+.code fagdag08112013/chat/conn.go /START2/,/END2/
+
+* Chat server
+
+.code fagdag08112013/chat/conn.go /START4/,/END4/
+.code fagdag08112013/chat/conn.go /START3/,/END3/
+
+#* Chat server
+#.code fagdag08112013/chat/home.html /START1/,/END1/
+
 * Hva kan Go brukes til?
 
 * Hvem bruker Go?
@@ -185,6 +183,15 @@ Introduksjon til Go
 - Docker
 - Heroku
 - SoundCloud
+- +++
+
+http://blog.golang.org/4years
+
+* Hvem bruker Go?
+
+.image fagdag08112013/4years-graph.png 222 489
+.image fagdag08112013/hn-trends.png 344 448
+
 
 #http://blog.golang.org/4years
 #http://talks.golang.org/2013/oscon-dl.slide#1
@@ -199,14 +206,9 @@ Introduksjon til Go
 - Built-in concurrency
 - Gøy å jobbe med!
 
-* -
+
+* -/?
 - Verbos feilhåndtering
 - Implisitt implementering av interface
 - Testing
-
-#* Og masse mer...
-#- Bygging og kjøring
-#- Utviklingsmiljø
-#- Dokumentasjon
-#- Testing 
-#- http://golang.org
+- Ingen versjonering av eksterne pakker

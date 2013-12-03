@@ -8,6 +8,7 @@ import (
 //START1 OMIT
 type Shaper interface {
    Area() int
+   Test() int
 }
 
 type Rectangle struct {
@@ -22,7 +23,8 @@ func (r Rectangle) Area() int {
 
 //START2 OMIT
 func main() {
-   r := Rectangle{length:5, width:3}
+   var r Shaper = Rectangle{length:5, width:3}
    fmt.Println("Rectangle's area: ", r.Area())
+   fmt.Println(r.(Shaper))
 }
 //END2 OMIT
